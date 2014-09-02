@@ -6,7 +6,7 @@ require 'uri'
 require 'pathname'
 require 'sinatra'
 require "sinatra/reloader" if development?
-require 'redis'
+# require 'redis'
 
 # $redis = Redis.new(:host => 'localhost', :port => 6379)
 
