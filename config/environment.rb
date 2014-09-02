@@ -8,7 +8,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 require 'redis'
 
-$redis = Redis.new(:host => 'localhost', :port => 6379)
+# $redis = Redis.new(:host => 'localhost', :port => 6379)
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
