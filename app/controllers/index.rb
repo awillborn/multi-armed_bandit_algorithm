@@ -74,3 +74,8 @@ post '/add_click' do
   color = params[:color]
   update_click_count(color)
 end
+
+post '/reset_db' do
+  $redis.flushdb
+end
+

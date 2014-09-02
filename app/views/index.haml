@@ -2,13 +2,13 @@
   %h1 Click the button if you like it...otherwise, refresh!
   - if @winning_color == "pink"
     %div.button-container
-      %button.button#pink I'm pink!
+      %button.button.color-button#pink I'm pink!
   - if @winning_color == "blue"
     %div.button-container
-      %button.button#blue I'm blue!
+      %button.button.color-button#blue I'm blue!
   - if @winning_color == "green"
     %div.button-container
-      %button.button#green I'm green!
+      %button.button.color-button#green I'm green!
   %h3 Pink
   = "Show: #{@pink_show}"
   = "Click: #{@pink_click}"
@@ -21,15 +21,27 @@
   = "Show: #{@green_show}"
   = "Click: #{@green_click}"
   = "Win Percentage: #{@green_wins}"
+%div.reset-db
+  %button.button#reset Reset Redis Store
 
 :javascript
   $(document).ready(function() {
-    $('.button').on('click', function(){
+    $('.color-button').on('click', function(){
       var color = $(this).attr('id')
       $.ajax({
         type: "POST",
         url: "/add_click",
         data: { color: color }
+      }).done(function(){
+        window.location = "/"
+      })
+    })
+
+    $('#reset').on('click', function(){
+      confirm("Are you sure you want to delete our hard-earned data?")
+      $.ajax({
+        type: "POST",
+        url: "/reset_db"
       }).done(function(){
         window.location = "/"
       })
