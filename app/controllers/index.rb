@@ -26,11 +26,15 @@ helpers do
     $redis.set "show:#{color}", current_show_count.to_i + 1
   end
 
-  def update_click_win_count(color)
+  def update_win_percentage(color)
+    click_count = $redis.get("click:#{color}").to_i
     show_count = $redis.get("show:#{color}").to_i
+    $redis.set "wins:#{color}", ((click_count.to_f/show_count.to_f) * 100).round(2)
+  end
+
+  def update_click_count(color)
     new_click_count = $redis.get("click:#{color}").to_i + 1
     $redis.set "click:#{color}", new_click_count
-    $redis.set "wins:#{color}", ((new_click_count.to_f/show_count.to_f) * 100).round(2)
   end
 
   def fetch_best_color
@@ -45,7 +49,7 @@ helpers do
     possible_winners.sample
   end
 
-  def get_redis_vars
+  def get_click_show_vars
     @pink_show = $redis.get "show:pink"
     @pink_click = $redis.get "click:pink"
     @pink_wins = $redis.get "wins:pink"
@@ -61,11 +65,12 @@ end
 get '/' do
   init_redis
   @winning_color = select_color
-  get_redis_vars
+  update_win_percentage(@winning_color)
+  get_click_show_vars
   haml :index
 end
 
 post '/add_click' do
   color = params[:color]
-  update_click_win_count(color)
+  update_click_count(color)
 end
