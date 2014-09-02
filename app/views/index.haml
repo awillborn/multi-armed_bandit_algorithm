@@ -1,0 +1,38 @@
+%div.container
+  %h1 Click the button if you like it...otherwise, refresh!
+  - if @winning_color == "pink"
+    %div.button-container
+      %button.button#pink I'm pink!
+  - if @winning_color == "blue"
+    %div.button-container
+      %button.button#blue I'm blue!
+  - if @winning_color == "green"
+    %div.button-container
+      %button.button#green I'm green!
+  %h3 Pink
+  = "Show: #{@pink_show}"
+  = "Click: #{@pink_click}"
+  = "Win Percentage: #{@pink_wins}"
+  %h3 Blue
+  = "Show: #{@blue_show}"
+  = "Click: #{@blue_click}"
+  = "Win Percentage: #{@blue_wins}"
+  %h3 Green
+  = "Show: #{@green_show}"
+  = "Click: #{@green_click}"
+  = "Win Percentage: #{@green_wins}"
+
+:javascript
+  $(document).ready(function() {
+    $('.button').on('click', function(){
+      var color = $(this).attr('id')
+      $.ajax({
+        type: "POST",
+        url: "/add_click",
+        data: { color: color }
+      }).done(function(){
+        window.location = "/"
+      })
+    })
+  });
+
