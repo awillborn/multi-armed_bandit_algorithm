@@ -1,5 +1,4 @@
 %div.container
-  %h1 Click the button if you like it...otherwise, refresh!
   - if @winning_color == "pink"
     %div.button-container
       %button.button.color-button#pink I'm pink!
@@ -9,18 +8,25 @@
   - if @winning_color == "green"
     %div.button-container
       %button.button.color-button#green I'm green!
-  %h3 Pink
-  = "Show: #{@pink_show}"
-  = "Click: #{@pink_click}"
-  = "Win Percentage: #{@pink_wins}"
-  %h3 Blue
-  = "Show: #{@blue_show}"
-  = "Click: #{@blue_click}"
-  = "Win Percentage: #{@blue_wins}"
-  %h3 Green
-  = "Show: #{@green_show}"
-  = "Click: #{@green_click}"
-  = "Win Percentage: #{@green_wins}"
+  .results-container
+    %div
+      %h3 Pink
+      %p
+        = "Show: #{@pink_show}"
+        = "Click: #{@pink_click}"
+        = "Win Percentage: #{@pink_wins}"
+    %div
+      %h3 Blue
+      %p
+        = "Show: #{@blue_show}"
+        = "Click: #{@blue_click}"
+        = "Win Percentage: #{@blue_wins}"
+    %div
+      %h3 Green
+      %p
+        = "Show: #{@green_show}"
+        = "Click: #{@green_click}"
+        = "Win Percentage: #{@green_wins}"
 %div.reset-db
   %button.button#reset Reset Redis Store
 
