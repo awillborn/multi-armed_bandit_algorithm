@@ -15,6 +15,16 @@ body {
   justify-content: space-around;
 }
 
+.explanation {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.explanation p {
+  line-height: 23px;
+  text-align: left;
+}
+
 h1 {
   text-align: center;
 }
@@ -30,6 +40,11 @@ h1 {
 
 .button {
   font-weight: bolder;
+}
+
+.color-button {
+  width: 30%;
+  font-size: large;
 }
 
 #pink {

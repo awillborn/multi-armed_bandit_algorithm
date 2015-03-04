@@ -1,13 +1,6 @@
-%div.container
-  - if @winning_color == "pink"
-    %div.button-container
-      %button.button.color-button#pink I'm pink!
-  - if @winning_color == "blue"
-    %div.button-container
-      %button.button.color-button#blue I'm blue!
-  - if @winning_color == "green"
-    %div.button-container
-      %button.button.color-button#green I'm green!
+.container
+  .button-container
+    %button.button.color-button{id: "#{@winning_color}"} Click Me
   .results-container
     %div
       %h3 Pink
@@ -24,8 +17,12 @@
       %p= "Show: #{@green_show}"
       %p= "Click: #{@green_click}"
       %p= "Win Percentage: #{@green_wins}"
-%div.reset-db
-  %button.button#reset Reset Redis Store
+  .explanation
+    %h4 A/B Testing with a Multi-Armed Bandit strategy
+    %p In this example, I am testing which color button results in the most clicks of the button. 50% of the time, I am showing the winning color, i.e. the color that has historically been clicked most often proportional to how often it has been shown. The other 50% of the time, I am selecting a color to display at random, in order to give the algorithm more training data. All of the data is stored in Redis, and is displayed below the button.
+  .reset-db
+    %button.button#reset Reset Redis Store
+
 
 :javascript
   $(document).ready(function() {
